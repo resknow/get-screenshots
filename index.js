@@ -24,7 +24,13 @@ function getSiteNameFromDomain(domain) {
 		let siteName = getSiteNameFromDomain(url);
 		console.log(`Getting screenshot of: ${siteName}...`);
 		await page.goto(url, { waitUntill: 'networkidle2' });
-		await page.screenshot({ path: `screenshots/${siteName}.jpg` });
+
+		// Get rid of cookie consent banners
+		if ((await page.$('.ccb-actions button')) !== null) {
+			await page.click('.ccb-actions button');
+		}
+
+		await page.screenshot({ path: `screenshots/${siteName}.png`, type: 'png' });
 		console.log(`Successfully took screenshot of ${siteName}`);
 	}
 
