@@ -6,7 +6,7 @@ function getSiteNameFromDomain(domain) {
 
 (async () => {
 	// URLs to take screenshots of
-	const urls = ['resknow.co.uk', 'google.com', 'pennyhills.com'];
+	const urls = ['https://resknow.co.uk', 'https://google.com', 'https://pennyhills.com'];
 
 	// Setup the browser
 	const browser = await puppeteer.launch();
@@ -24,7 +24,7 @@ function getSiteNameFromDomain(domain) {
 	for (const url of urls) {
 		let siteName = getSiteNameFromDomain(url);
 		console.log(`Getting screenshot of: ${siteName}...`);
-		await page.goto(`https://${url}`, { waitUntill: 'networkidle2' });
+		await page.goto(url, { waitUntill: 'networkidle2' });
 		await page.screenshot({ path: `screenshots/${siteName}.jpg` });
 		console.log(`Successfully took screenshot of ${siteName}`);
 	}
