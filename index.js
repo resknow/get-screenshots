@@ -1,13 +1,12 @@
 const puppeteer = require('puppeteer');
+const urls = require('./urls');
 
 function getSiteNameFromDomain(domain) {
-	return domain.split('.')[0];
+	let name = domain.split('.')[0];
+	return name.replace('https://', '').replace('http://', '');
 }
 
 (async () => {
-	// URLs to take screenshots of
-	const urls = ['https://resknow.co.uk', 'https://google.com', 'https://pennyhills.com'];
-
 	// Setup the browser
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
